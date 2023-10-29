@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title> Object_types </title>
+</head>
+<body>
+    <p>
+        int : {{ int }}
+        <br><br>
+        float : {{ float }}
+        <br><br>
+        string : {{ str }}
+        <br><br>
+        list : {% for item in list %}
+            {{ item }}
+        {% endfor %}
+        <br><br>
+        dict : {% for key, value in dict.items %}
+            {{ key }} : {{ value }}
+        {% endfor %}
+        <br><br>
+        tuple : {% for item in tuple %}
+            {{ item }}
+        {% endfor %}
+        <br><br>
+        set : {% for item in set %}
+            {{ item }}
+        {% endfor %}
+        <br><br>
+        bool : {{ bool }}
+        <br><br>
+    </p>
+</body>
+</html>

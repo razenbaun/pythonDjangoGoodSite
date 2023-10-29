@@ -1,5 +1,5 @@
 """
-URL configuration for goodsite project.
+URL configuration for GoodSite project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+
 from django.contrib import admin
 from django.urls import path, include
 from people.views import *
@@ -25,7 +26,11 @@ urlpatterns = [
     path('', include('people.urls')),
 ]
 
-handler404 = page_not_found
 handler500 = server_down
-handler403 = access_is_denied
-handler400 = request_cannot_be_processed
+
+handler404 = page_not_found
+
+handler403 = forbidden
+
+handler400 = bad_request
+
