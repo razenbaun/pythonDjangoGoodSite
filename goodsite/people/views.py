@@ -129,15 +129,11 @@ def split_line(request, line, sepp):
     for i in ml:
         new_ml.append(line[buff:i])
         if buff + 1 > len(line):
-            return HttpResponse(f'<h1>{new_ml}</h1>')
+            break
         buff = i + 1
 
     if line[buff:len(line)] not in new_ml:
         new_ml.append(line[buff:len(line)])
-
-    for i in new_ml:
-        if i == '':
-            new_ml.pop(new_ml.index(i))
 
     for i in range(len(new_ml)):
         k = new_ml[i].count('"')
@@ -145,6 +141,10 @@ def split_line(request, line, sepp):
             new_ml[i] = new_ml[i].replace('"', '')
         elif k > 1 and k % 2 != 0:
             new_ml[i] = new_ml[i].replace('"', '', k - 1)
+
+    for i in new_ml:
+        if i == '':
+            new_ml.pop(new_ml.index(i))
 
     return HttpResponse(f'<h1>{new_ml}</h1>')
 
