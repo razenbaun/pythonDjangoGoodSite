@@ -11,4 +11,5 @@ urlpatterns = [
     path('post/', post_detail, name="post_detail"),
     path('home/', redirect_to_home, name='home_redirect'),
     path('split/<str:line>/<str:sepp>/', split_line, name='split_line'),
+    path('filters/', filters, name='filters'),
 ]

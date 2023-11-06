@@ -3,43 +3,11 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadReque
 from django.shortcuts import render, redirect
 import re
 
-
-class DataBase:
-    __instance = None
-    __connect = None
-
-    def __new__(cls, *args, **kwargs):
-        if cls.__instance is None:
-            cls.__instance = super().__new__(cls)
-        return cls.__instance
-
-    def __del__(self):
-        self.__instance = None
-        self.__connect = None
-
-    def __init__(self, user, psw, port):
-        if self.__connect is None:
-            self.user = user
-            self.psw = psw
-            self.port = port
-            self.data = "DATA"
-
-    def connect(self):
-        print(f"Соединение с Базой данных:{self.user}, "
-              f"{self.psw}, {self.port}")
-
-    def close(self):
-        print("Закрыть соединение с Базой данных")
-
-    def read(self):
-        return "Данные из Базы данных"
-
-    def write(self):
-        print(f"Запись в Базу данных {self.data}")
+menu = [{'title': 'Главная', 'url_n': 'home'}]
 
 
 def index(request):
-    return render(request, 'people/index.html')
+    return render(request, 'people/index.html', context=menu)
 
 
 pri_info = {
@@ -84,14 +52,15 @@ def pri_id(request, number_student):
 
 
 dict_object_types = {
-    'int': '1',
-    'float': 1.1,
-    'str': 'some_string',
-    'list': [1, 2, 3],
-    'dict': {'key': 'value'},
+    'bool': False,
+    'int': 1886,
+    'float': 3.14,
+    'str': 'string',
     'tuple': [4, 5, 6],
-    'set': {'seven', 'eight'},
-    'bool': True,
+    'set': {'item_one', 'item_two'},
+    'list': [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+    'dict': {'key': 'value'},
+    'test_str': 'Hello, world!',
 }
 
 
@@ -112,7 +81,6 @@ def post_detail(request):
 
 
 def split_line(request, line, sepp):
-
     flag = True
     ml = []
     new_ml = []
@@ -151,6 +119,13 @@ def split_line(request, line, sepp):
 
 def redirect_to_home(request):
     return redirect(index)
+
+
+value = 'capfirst'
+
+
+def filters(request):
+    return render(request, 'people/filters.html', context=dict_object_types)
 
 
 def categories(request, cat):
