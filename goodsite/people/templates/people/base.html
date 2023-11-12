@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+    {% for m in menu %}
+    <ul style="display: inline-block;">
+        <li>
+            <a href="{% url m.url_n %}"> {{m.title}}</a>
+        </li>
+    </ul>
+    {% endfor %}
+
+    <h1> {{title}} </h1>
+
+    {% block content1 %}
+    {% endblock %}
+</body>
+</html>

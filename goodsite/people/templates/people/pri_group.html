@@ -6,77 +6,9 @@
 </head>
 <body>
     <h1> ПрИ-201 </h1>
-    <a href="/pri/1">
-        1.{% for item in abramov %}
-            {{ item }}
+    {% for key, value in pri.items %}
+            <a href="/pri/{{ key }}">{{ key }} : {{ value }} </a>
+            <br><br>
         {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/2">
-        2.{% for item in bliznuk %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/3">
-        3.{% for item in zverev %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/4">
-        4.{% for item in karaguzin %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/5">
-        5.{% for item in kruglik %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/6">
-        6.{% for item in luskov %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/7">
-        7.{% for item in maklyusov %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/8">
-        8.{% for item in maneshin %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/9">
-        9.{% for item in petrachkov %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/10">
-        10.{% for item in safonov %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/11">
-        11.{% for item in tereshin %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
-    <a href="/pri/12">
-        12.{% for item in chertcov %}
-            {{ item }}
-        {% endfor %}
-    </a>
-    <br><br>
 </body>
 </html>
