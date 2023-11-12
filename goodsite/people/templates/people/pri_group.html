@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title> PrI Group </title>
-</head>
-<body>
-    <h1> ПрИ-201 </h1>
+{% extends 'people/base.html' %}
+
+
+
+{% block content %}
+
+<p>
     {% for key, value in pri.items %}
-            <a href="/pri/{{ key }}">{{ key }} : {{ value }} </a>
-            <br><br>
-        {% endfor %}
-</body>
-</html>
+                <a href="/pri/{{ key }}">{{ key }} : {{ value }} </a>
+                <br><br>
+    {% endfor %}
+</p>
+
+{% endblock %}

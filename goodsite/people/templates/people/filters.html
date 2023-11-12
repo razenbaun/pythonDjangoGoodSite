@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> Фильтры </title>
-</head>
-<body>
-    <p>
+{% extends 'people/base.html' %}
 
+
+
+{% block content %}
+    <p>
     If == 1 : {% for item in list %} {% if item == 1 %} {{item}} {% endif %} {% endfor %} <br>
     If > 1 : {% for item in list %} {% if item > 1 %} {{item}} {% endif %} {% endfor %} <br>
     If "!" in "Hello, world!" : {% if "!" in test_str %} True {% endif %} <br><br>
@@ -29,5 +26,4 @@
 
     filter "Hello, world!" cut (", ") : {{ test_str|cut:", " }}
     </p>
-</body>
-</html>
+{% endblock %}

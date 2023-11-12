@@ -1,29 +1,13 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title> Object Types </title>
-</head>
-<body>
-    <p>
-        bool : {{ bool }} <br><br>
-        int : {{ int }} <br><br>
-        float : {{ float }} <br><br>
-        string : {{ str }} <br><br>
+{% extends 'people/base.html' %}
 
-        tuple : {% for item in tuple %}
-            {{ item }}
-        {% endfor %} <br><br>
-        set : {% for item in set %}
-            {{ item }}
-        {% endfor %} <br><br>
-        list : {% for item in list %}
-            {{ item }}
-        {% endfor %} <br><br>
-        dict : {% for key, value in dict.items %}
+
+
+{% block content %}
+    <p>
+        {% for key, value in dict.items %}
             {{ key }} : {{ value }}
-        {% endfor %} <br><br>
+            <br><br>
+        {% endfor %}
 
     </p>
-</body>
-</html>
+{% endblock %}

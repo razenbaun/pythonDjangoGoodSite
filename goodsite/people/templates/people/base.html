@@ -3,19 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/base.css' %}">
 </head>
 <body>
-    {% for m in menu %}
-    <ul style="display: inline-block;">
-        <li>
-            <a href="{% url m.url_n %}"> {{m.title}}</a>
-        </li>
-    </ul>
-    {% endfor %}
+    <nav class="navbar">
+        <a href="/">Главная страница</a>
+        <ul class="navbar-list">
+            {% for m in menu %}
+            <li>
+                <a href="{% url m.url_n %}"> {{m.title}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
 
-    <h1> {{title}} </h1>
+    <header>
+        <div class="container">
+            <h1> {{title}} </h1>
+        </div>
+    </header>
 
-    {% block content1 %}
-    {% endblock %}
+    <section>
+        <div class="container">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <h2 class="footer-title">FRONT.END</h2>
+            <div class="footer-desc">
+
+                <p class="footer-text-top">
+                    Get valuable strategy, culture, <br>
+                    and brand insights straight to your inbox.
+
+                </p>
+                <input type="text" placeholder="Your email here" class="input-text">
+
+                <p class="footer-text-last">
+                    By signing up to receive emails from Motto,
+                    you agree to our <a href="" class="mini-text">Privacy Policy.</a>
+                    We treat your info responsibly. Unsubscribe anytime.
+
+                </p>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

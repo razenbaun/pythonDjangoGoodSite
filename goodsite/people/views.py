@@ -1,17 +1,19 @@
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseForbidden, \
     HttpResponseServerError
 from django.shortcuts import render, redirect
-import re
 
 menu = [
-    {'title': 'Главная', 'url_n': 'home'},
-    {'title': ' О сайте', 'url_n': 'about'}
+    {'title': 'О сайте', 'url_n': 'about'},
+    {'title': 'Группа ПрИ-201', 'url_n': 'pri_group'},
+    {'title': 'object_types', 'url_n': 'object_types'},
+    {'title': 'filters', 'url_n': 'filters'},
 ]
 
 
 def index(request):
     data = {
         'menu': menu,
+        'title': "Главная страница"
     }
     return render(request, 'people/index.html', context=data)
 
@@ -31,26 +33,23 @@ pri = {
     '12': 'Чертков Федор Андреевич, 22-2.043',
 }
 
-pri_info = {'pri': pri}
-
 
 def pri_group(request):
-    return render(request, 'people/pri_group.html', context=pri_info)
+    data = {
+        'menu': menu,
+        'title': "ПрИ-201",
+        'pri': pri,
+    }
+    return render(request, 'people/pri_group.html', context=data)
 
 
 def pri_id(request, number_student):
-    try:
-        out = '<h1> ПрИ-201 </h1> <p>'
-        buff = 0
-        for key, item in pri.items():
-            if key == str(number_student):
-                out += item
-                break
-        out += '</p>'
-        return HttpResponse(out)
-    except:
-        out = '<h1> Ошибка </h1> <h3> Такого студента не существует </h3>'
-        return HttpResponse(out)
+    data = {
+        'menu': menu,
+        'title': pri.get(str(number_student)),
+        'number_student': number_student,
+    }
+    return render(request, 'people/pri_id.html', context=data)
 
 
 dict_object_types = {
@@ -67,11 +66,19 @@ dict_object_types = {
 
 
 def object_types(request):
-    return render(request, 'people/object_types.html', context=dict_object_types)
+    data = {
+        'menu': menu,
+        'dict': dict_object_types,
+    }
+    return render(request, 'people/object_types.html', context=data)
 
 
 def about(request):
-    return HttpResponse('<h1> БГИТУ </h1>')
+    data = {
+        'menu': menu,
+        'title': "О сайте",
+    }
+    return render(request, 'people/about.html', context=data)
 
 
 def post_detail(request):
@@ -127,7 +134,18 @@ value = 'capfirst'
 
 
 def filters(request):
-    return render(request, 'people/filters.html', context=dict_object_types)
+    data = {
+        'menu': menu,
+        'int': 1886,
+        'float': 3.14,
+        'str': 'string',
+        'tuple': [4, 5, 6],
+        'set': {'item_one', 'item_two'},
+        'list': [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+        'dict': {'key': 'value'},
+        'test_str': 'Hello, world!',
+    }
+    return render(request, 'people/filters.html', context=data)
 
 
 def categories(request, cat):
