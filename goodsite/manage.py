@@ -18,5 +18,9 @@ def main():
     execute_from_command_line(sys.argv)
 
 
+# python manage.py makemigrations создание миграции
+# python manage.py sqlmigrate people 0001
+# python manage.py migrate выполнение миграции
+
 if __name__ == '__main__':
     main()
