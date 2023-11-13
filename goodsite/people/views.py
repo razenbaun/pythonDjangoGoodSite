@@ -47,7 +47,7 @@ def pri_id(request, number_student):
     data = {
         'menu': menu,
         'title': pri.get(str(number_student)),
-        'number_student': number_student,
+        'student': 'image/' + str(number_student) + '.jpg',
     }
     return render(request, 'people/pri_id.html', context=data)
 
