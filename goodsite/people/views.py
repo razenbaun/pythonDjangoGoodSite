@@ -1,11 +1,23 @@
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseForbidden, \
     HttpResponseServerError
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
+
+from people.forms import RegisterUserForm
 
 menu = [
     {'title': 'О сайте', 'url_n': 'about'},
     {'title': 'Группа ПрИ-201', 'url_n': 'pri_group'},
 ]
+
+
+class DataMixin:
+    def get_user_context(self, **kwargs):
+        context = kwargs
+        context['menu'] = menu
+        return context
 
 
 def index(request):
@@ -62,10 +74,7 @@ def redirect_to_home(request):
     return redirect(index)
 
 
-
-
-
-def categories(request, cat):
+def categories(request):
     return HttpResponse('<h1> Ошибка </h1> <h3> Такого студента не существует </h3>')
 
 
@@ -83,3 +92,14 @@ def bad_request(request, exception):
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1> Страница не найдена. Проверьте адрес!!! </h1>')
+
+
+class RegisterUser(DataMixin, CreateView):
+    form_class = RegisterUserForm
+    template_name = 'people/register.html'
+    success_url = reverse_lazy('login')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Регистрация")
+        return dict(list(context.items()) + list(c_def.items()))

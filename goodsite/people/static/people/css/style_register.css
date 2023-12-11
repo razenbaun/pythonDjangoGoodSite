@@ -1,0 +1,57 @@
+.reg-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+p {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+input {
+    height: 40px;
+    width: 550px;
+    outline: none;
+    outline-offset: none;
+    border: none;
+    border-bottom-style: solid;
+    border-radius: 16px;
+    border-bottom-width: 1px;
+    padding-left: 12px;
+    background-color: #333;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    color: #979797;
+}
+
+.butt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.but {
+    width: 400px;
+    height: 40px;
+    font-weight: var(400);
+    font-size: 18px;
+    line-height: 16.94px;
+    letter-spacing: 2%;
+    color: #333;
+    background-color: rgb(216, 216, 216);
+    transition: all ease 0.5s;
+    margin-bottom: 32px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.but:hover {
+    color: rgb(216, 216, 216);
+    background-color: #333;
+    transition: all ease 0.5s;
+}

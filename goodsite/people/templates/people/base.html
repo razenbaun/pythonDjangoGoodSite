@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>{{title}}</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href=" {% static 'css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href=" {% static 'people/css/base.css' %}">
+    {% block content_css %}
+    {% endblock %}
 </head>
 <body>
     <nav class="navbar">
@@ -15,14 +17,14 @@
                 <a href="{% url m.url_n %}"> {{m.title}}</a>
             </li>
             {% endfor %}
+            <li>
+                <a href="{% url 'register' %}">Регистрация</a>
+            </li>
+            <li>
+                <a href="{% url 'login' %}">Войти</a>
+            </li>
         </ul>
     </nav>
-
-    <header>
-        <div class="container">
-            <h1> {{title}} </h1>
-        </div>
-    </header>
 
     <section>
         <div class="container">
@@ -43,7 +45,6 @@
                     and brand insights straight to your inbox.
 
                 </p>
-                <input type="text" placeholder="Your email here" class="input-text">
 
                 <p class="footer-text-last">
                     By signing up to receive emails from Motto,
