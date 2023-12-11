@@ -17,12 +17,16 @@
                 <a href="{% url m.url_n %}"> {{m.title}}</a>
             </li>
             {% endfor %}
-            <li>
-                <a href="{% url 'register' %}">Регистрация</a>
-            </li>
-            <li>
-                <a href="{% url 'login' %}">Войти</a>
-            </li>
+            {% if request.user.is_authenticated %}
+                <li> {{user.username}} <a href="{% url 'logout' %}">| Выйти</a></li>
+            {% else %}
+                <li>
+                    <a href="{% url 'register' %}">Регистрация</a>
+                </li>
+                <li>
+                    <a href="{% url 'login' %}">Войти</a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 
