@@ -5,6 +5,7 @@ from django.urls import reverse
 
 class Portfolio(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     creation_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
     description = models.TextField(max_length=765)
@@ -30,7 +31,7 @@ class Portfolio(models.Model):
         return str(self.user)
 
     def get_absolute_url(self):
-        return reverse('portfolio_id', kwargs={'portfolio_id': self.pk})
+        return reverse('portfolio_slug', kwargs={'portfolio_slug': self.pk})
 
     class Meta:
         verbose_name = 'Портфолио'

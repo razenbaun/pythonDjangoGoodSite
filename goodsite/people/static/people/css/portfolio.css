@@ -1,0 +1,58 @@
+.portfolio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.frame {
+    border-radius: 5px;
+    border-color: #333;
+    border: 3px solid black;
+}
+
+.last {
+    font-size: 25px;
+    font-weight: 400;
+    padding: 10px;
+}
+
+.article-panel {
+    border-bottom: 3px solid black;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    background-color: #979797;
+}
+
+.list-articles {
+    list-style-type: none;
+}
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.text-description p {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 18px;
+    color: #333;
+}
+
+.clear {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.look {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    font-size: 22px;
+    line-height: 14px;
+    font-weight: 400;
+    color: black;
+}

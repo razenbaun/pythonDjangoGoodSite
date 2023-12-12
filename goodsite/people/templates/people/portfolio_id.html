@@ -1,0 +1,50 @@
+{% extends 'people/base.html' %}
+
+{% block content_css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href=" {% static 'people/css/portfolio_slug.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="portfolio-container">
+
+    <h1>{{title}} пользователя {{post.user}}</h1>
+
+    <div class="content">
+
+        <p class="skills">Навыки: {{post.skills}} </p>
+
+        <p class="description">{{post.description}}</p>
+
+        <div class="card">
+            {% if post.photo_1 %}
+                <img class="img-article" src="{{post.photo_1.url}}">
+            {% endif %}
+            {% if post.link_1 %}
+                <a class="look" href="{{ post.link_1 }}">Перейти по ссылке</a>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            {% if post.photo_2 %}
+                <img class="img-article" src="{{post.photo_2.url}}">
+            {% endif %}
+            {% if post.link_2 %}
+                <a class="look" href="{{ post.link_2 }}">Перейти по ссылке</a>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            {% if post.photo_3 %}
+                <img class="img-article" src="{{post.photo_3.url}}">
+            {% endif %}
+            {% if post.link_3 %}
+                <a class="look" href="{{ post.link_2 }}">Перейти по ссылке</a>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

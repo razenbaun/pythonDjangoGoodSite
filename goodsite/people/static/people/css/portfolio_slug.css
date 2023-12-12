@@ -1,0 +1,55 @@
+.portfolio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.frame {
+    border-radius: 5px;
+    border-color: #333;
+    border: 3px solid black;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.skills {
+    font-size: 25px;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.content {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.img-article {
+    width: 100%;
+}
+
+.description {
+    font-size: 20px;
+    width: 40%;
+}
+
+.card {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+.look {
+    margin-top: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 14px;
+    font-weight: 400;
+    color: black;
+}

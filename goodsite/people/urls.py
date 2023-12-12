@@ -8,7 +8,6 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('profile/', profile, name='profile'),
     path('portfolio/', portfolio, name='portfolio'),
-    path('portfolio/<int:portfolio_id>/', show_portfolio, name='portfolio_id'),
-    path('portfolio/<slug:cat>/', categories, name='categories'),
+    path('portfolio/<slug:portfolio_slug>/', show_portfolio, name='portfolio_slug'),
     path('home/', redirect_to_home, name='home_redirect'),
 ]

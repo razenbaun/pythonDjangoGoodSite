@@ -1,31 +1,39 @@
 {% extends 'people/base.html' %}
 
-
+{% block content_css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href=" {% static 'people/css/portfolio.css' %}">
+{% endblock %}
 
 {% block content %}
      <div class="portfolio-container">
         <h1>{{title}}</h1>
 
+         <div class="frame">
         <ul class="list-articles">
         {% for p in posts %}
             <li>
                 <div class="article-panel">
-                    <p class="last">Дата: {{p.creation_date|date:"d-m-Y"}}</p>
+                    <p class="last">Дата публикации: {{p.creation_date|date:"d-m-Y"}}</p>
                 </div>
 
-    {% if p.photo %}
-        <p><img class="img-article-left thumb" src="{{p.photo.url}}"></p>
-    {% endif %}
+            {% if p.photo %}
+                <p><img class="img-article-left thumb" src="{{p.photo.url}}"></p>
+            {% endif %}
 
                     <h2>{{p.user}}</h2>
-        {% autoescape on %}
-        {{p.description|linebreaks|truncatewords:50}}
-        {% endautoescape %}
-                <div class="clear"></div>
-                <p class="link-read-post"><a href="{{ p.get_absolute_url }}">Смотреть</a></p>
+            <div class="text-description">
+                {% autoescape on %}
+                {{p.description|linebreaks|truncatewords:50}}
+                {% endautoescape %}
+            </div>
+                <div class="clear">
+                    <a class="look" href="{{ p.get_absolute_url }}">Смотреть</a>
+                </div>
                 </li>
         {% endfor %}
-    </ul>
+        </ul>
+        </div>
 
      </div>
 {% endblock %}

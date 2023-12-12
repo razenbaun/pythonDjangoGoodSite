@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseForbidden, \
     HttpResponseServerError
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
@@ -73,8 +73,16 @@ def portfolio(request):
     return render(request, 'people/portfolio.html', context=data)
 
 
-def show_portfolio(request, portfolio_id):
-    return HttpResponse(f"Отображение Портфолио с id = {portfolio_id}")
+def show_portfolio(request, portfolio_slug):
+    post = get_object_or_404(Portfolio, slug=portfolio_slug)
+
+    data = {
+        'post': post,
+        'menu': menu,
+        'title': 'Портфолио'
+    }
+
+    return render(request, 'people/portfolio_id.html', context=data)
 
 
 def redirect_to_home(request):
