@@ -6,9 +6,9 @@ urlpatterns = [
     path('register/', RegisterUser.as_view(), name='register'),
     path('login/', LoginUser.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
-    path('about/', about, name='about'),
-    path('pri/', pri_group, name='pri_group'),
-    path('pri/<int:number_student>/', pri_id, name='spisok_pri'),
-    path('pri/<slug:cat>/', categories, name='categories'),
+    path('profile/', profile, name='profile'),
+    path('portfolio/', portfolio, name='portfolio'),
+    path('portfolio/<int:portfolio_id>/', show_portfolio, name='portfolio_id'),
+    path('portfolio/<slug:cat>/', categories, name='categories'),
     path('home/', redirect_to_home, name='home_redirect'),
 ]
