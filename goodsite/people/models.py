@@ -31,7 +31,7 @@ class Portfolio(models.Model):
         return str(self.user)
 
     def get_absolute_url(self):
-        return reverse('portfolio_slug', kwargs={'portfolio_slug': self.pk})
+        return reverse('portfolio_slug', kwargs={'portfolio_slug': self.slug})
 
     class Meta:
         verbose_name = 'Портфолио'

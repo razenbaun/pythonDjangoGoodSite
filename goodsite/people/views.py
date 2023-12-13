@@ -87,21 +87,18 @@ def show_portfolio(request, portfolio_slug):
     return render(request, 'people/portfolio_id.html', context=data)
 
 
-def redirect_to_home(request):
-    return redirect(index)
-
-
 def add_portfolio(request):
     if request.method == 'POST':
-        form = AddPortfolioForm(request.POST)
+        form = AddPortfolioForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
-            print(form.cleaned_data)
+            form.save()
+            return redirect('portfolio')
     else:
-        form = AddPortfolioForm()
+        form = AddPortfolioForm(user=request.user)
     data = {
         'form': form,
         'menu': menu,
-        'title': 'Добавление статьи'
+        'title': 'Добавить Портфолио'
     }
     return render(request, 'people/add_portfolio.html', context=data)
 
@@ -122,8 +119,22 @@ def profile(request):
         return redirect('login')
 
 
-def categories(request, cat):
-    return HttpResponse('<h1> Ошибка </h1> <h3> Такого студента не существует </h3>')
+def delete_portfolio(request):
+    portfolio = get_object_or_404(Portfolio, user=request.user)
+
+    if request.method == 'POST':
+        portfolio.delete()
+        return redirect('profile')
+
+    data = {
+        'portfolio': portfolio,
+        'menu': menu,
+    }
+    return render(request, 'delete_portfolio.html', context=data)
+
+
+def redirect_to_home(request):
+    return redirect(index)
 
 
 def server_down(exception):

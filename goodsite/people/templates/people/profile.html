@@ -11,6 +11,11 @@
 
     <h1>{{title}}</h1>
 
+    <form action="{% url 'delete_portfolio' %}" method="POST">
+          {% csrf_token %}
+          <button type="submit">Удалить портфолио</button>
+    </form>
+
     <div class="content">
         {% if post.skills %}
             <p class="skills">Навыки: {{post.skills}} </p>
