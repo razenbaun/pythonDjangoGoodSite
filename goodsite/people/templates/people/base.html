@@ -31,11 +31,13 @@
     </nav>
 
     <section>
+        <div class="intro" id="intro">
         <div class="container">
 
             {% block content %}
             {% endblock %}
 
+        </div>
         </div>
     </section>
 
@@ -52,7 +54,7 @@
 
                 <p class="footer-text-last">
                     By signing up to receive emails from Motto,
-                    you agree to our <a href="" class="mini-text">Privacy Policy.</a>
+                    you agree to our <a href="{% url 'privacy' %}" class="mini-text">Privacy Policy.</a>
                     We treat your info responsibly. Unsubscribe anytime.
 
                 </p>

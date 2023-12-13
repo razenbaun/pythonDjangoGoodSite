@@ -1,0 +1,9 @@
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 1055px;
+    margin-top: 150px;
+    font-size: 20px;
+}

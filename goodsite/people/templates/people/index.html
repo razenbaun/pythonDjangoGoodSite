@@ -1,7 +1,14 @@
 {% extends 'people/base.html' %}
 
-
+{% block content_css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href=" {% static 'people/css/intro.css' %}">
+{% endblock %}
 
 {% block content %}
+
+<script src="{% static 'people/js/three.min.js' %}"></script>
+<script src="{% static 'people/js/vanta.rings.min.js' %}"></script>
+<script src="{% static 'people/js/app.js' %}"></script>
 
 {% endblock %}

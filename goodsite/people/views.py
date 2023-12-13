@@ -65,6 +65,13 @@ def index(request):
     return render(request, 'people/index.html', context=data)
 
 
+def privacy(request):
+    data = {
+        'menu': menu,
+    }
+    return render(request, 'people/privacy.html', context=data)
+
+
 def portfolio(request):
     posts = Portfolio.objects.all()
     data = {
