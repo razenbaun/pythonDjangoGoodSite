@@ -8,8 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
-from people.forms import RegisterUserForm, LoginUserForm
+from people.forms import RegisterUserForm, LoginUserForm, AddPortfolioForm
 from .models import *
+from django.http import Http404
 
 menu = [
     {'title': 'Портфолио', 'url_n': 'portfolio'},
@@ -21,6 +22,7 @@ class DataMixin:
         context = kwargs
         context['menu'] = menu
         return context
+
 
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
@@ -89,12 +91,32 @@ def redirect_to_home(request):
     return redirect(index)
 
 
-def profile(request):
+def add_portfolio(request):
+    if request.method == 'POST':
+        form = AddPortfolioForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form = AddPortfolioForm()
     data = {
+        'form': form,
         'menu': menu,
-        'title': "Ваше портфолио",
+        'title': 'Добавление статьи'
     }
+    return render(request, 'people/add_portfolio.html', context=data)
+
+
+def profile(request):
     if request.user.is_authenticated:
+        try:
+            post = get_object_or_404(Portfolio, user=request.user)
+        except Http404:
+            return redirect('add_portfolio')
+        data = {
+            'post': post,
+            'menu': menu,
+            'title': "Ваше портфолио",
+        }
         return render(request, 'people/profile.html', context=data)
     else:
         return redirect('login')
@@ -118,5 +140,3 @@ def bad_request(request, exception):
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1> Страница не найдена. Проверьте адрес!!! </h1>')
-
-
