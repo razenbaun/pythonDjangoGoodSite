@@ -133,6 +133,22 @@ def delete_portfolio(request):
     return render(request, 'delete_portfolio.html', context=data)
 
 
+def edit_portfolio(request):
+    portfolio = get_object_or_404(Portfolio, user=request.user)
+
+    if request.method == 'POST':
+        # Обработка данных, отправленных пользователем при редактировании
+        form = AddPortfolioForm(request.POST, instance=portfolio)
+        if form.is_valid():
+            form.save()
+            # Обработка успешного изменения, например, перенаправление на другую страницу
+            return redirect('portfolio_list')
+    else:
+        form = AddPortfolioForm(instance=portfolio)
+
+    return render(request, 'edit_portfolio.html', {'form': form, 'portfolio': portfolio})
+
+
 def redirect_to_home(request):
     return redirect(index)
 
