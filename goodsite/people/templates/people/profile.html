@@ -11,16 +11,8 @@
 
     <h1>{{title}}</h1>
 
-    <form action="{% url 'delete_portfolio' %}" method="POST">
-          {% csrf_token %}
-          <button type="submit">Удалить портфолио</button>
-    </form>
-
-    <a href="{% url 'edit_portfolio' %}">
-        <button>Редактировать портфолио</button>
-    </a>
-
     <div class="content">
+
         {% if post.skills %}
             <p class="skills">Навыки: {{post.skills}} </p>
         {% endif %}
@@ -28,7 +20,7 @@
             <p class="description">{{post.description}}</p>
         {% endif %}
 
-        
+
 
         <div class="card">
             {% if post.photo_1 %}
@@ -103,6 +95,11 @@
         </div>
 
     </div>
+
+    <form action="{% url 'delete_portfolio' %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="but-delete">Удалить портфолио</button>
+    </form>
 
 </div>
 {% endblock %}

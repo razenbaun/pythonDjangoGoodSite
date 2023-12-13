@@ -87,20 +87,18 @@ def show_portfolio(request, portfolio_slug):
     return render(request, 'people/portfolio_id.html', context=data)
 
 
-def add_portfolio(request):
+def delete_portfolio(request):
+    portfolio = get_object_or_404(Portfolio, user=request.user)
+
     if request.method == 'POST':
-        form = AddPortfolioForm(request.POST, request.FILES, user=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('portfolio')
-    else:
-        form = AddPortfolioForm(user=request.user)
+        portfolio.delete()
+        return redirect('profile')
+
     data = {
-        'form': form,
+        'portfolio': portfolio,
         'menu': menu,
-        'title': 'Добавить Портфолио'
     }
-    return render(request, 'people/add_portfolio.html', context=data)
+    return render(request, 'people/profile.html', context=data)
 
 
 def profile(request):
@@ -119,34 +117,20 @@ def profile(request):
         return redirect('login')
 
 
-def delete_portfolio(request):
-    portfolio = get_object_or_404(Portfolio, user=request.user)
-
+def add_portfolio(request):
     if request.method == 'POST':
-        portfolio.delete()
-        return redirect('profile')
-
-    data = {
-        'portfolio': portfolio,
-        'menu': menu,
-    }
-    return render(request, 'delete_portfolio.html', context=data)
-
-
-def edit_portfolio(request):
-    portfolio = get_object_or_404(Portfolio, user=request.user)
-
-    if request.method == 'POST':
-        # Обработка данных, отправленных пользователем при редактировании
-        form = AddPortfolioForm(request.POST, instance=portfolio)
+        form = AddPortfolioForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
             form.save()
-            # Обработка успешного изменения, например, перенаправление на другую страницу
-            return redirect('portfolio_list')
+            return redirect('portfolio')
     else:
-        form = AddPortfolioForm(instance=portfolio)
-
-    return render(request, 'edit_portfolio.html', {'form': form, 'portfolio': portfolio})
+        form = AddPortfolioForm(user=request.user)
+    data = {
+        'form': form,
+        'menu': menu,
+        'title': 'Добавить Портфолио'
+    }
+    return render(request, 'people/add_portfolio.html', context=data)
 
 
 def redirect_to_home(request):
