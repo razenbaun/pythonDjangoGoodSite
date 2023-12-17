@@ -33,8 +33,8 @@ class AcademicAchievements(models.Model):
         return str(self.user)
 
     class Meta:
-        verbose_name = 'Академические достижения'
-        verbose_name_plural = 'Академические достижения'
+        verbose_name = 'Достижения'
+        verbose_name_plural = 'Достижения'
         ordering = ['-creation_date', 'user']
 
 
