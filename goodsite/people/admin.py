@@ -10,3 +10,7 @@ class PortfolioAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Portfolio, PortfolioAdmin)
+
+
+admin.site.register(AcademicAchievements)
+admin.site.register(Category)

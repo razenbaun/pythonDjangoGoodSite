@@ -9,87 +9,17 @@
 {% block content %}
 <div class="portfolio-container">
 
-    <h1>{{title}} пользователя {{post.user}}</h1>
+    <h1>{{title}} пользователя {{portfolio.user}}</h1>
 
     <div class="content">
 
-        <p class="skills">Навыки: {{post.skills}} </p>
+        <p class="skills">Навыки: {{portfolio.skills}} </p>
 
-        <p class="description">{{post.description}}</p>
+        <p class="description">{{portfolio.description}}</p>
 
-        <div class="card">
-            {% if post.photo_1 %}
-                <img class="img-article" src="{{post.photo_1.url}}">
-            {% endif %}
-            {% if post.link_1 %}
-                <a class="look" href="{{ post.link_1 }}">Перейти по ссылке</a>
-            {% endif %}
-        </div>
-
-        <div class="card">
-            {% if post.photo_2 %}
-                <img class="img-article" src="{{post.photo_2.url}}">
-            {% endif %}
-            {% if post.link_2 %}
-                <a class="look" href="{{ post.link_2 }}">Перейти по ссылке</a>
-            {% endif %}
-        </div>
-
-        <div class="card">
-            {% if post.photo_3 %}
-                <img class="img-article" src="{{post.photo_3.url}}">
-            {% endif %}
-            {% if post.link_3 %}
-                <a class="look" href="{{ post.link_3 }}">Перейти по ссылке</a>
-            {% endif %}
-        </div>
-
-        <div class="card">
-            {% if post.photo_4 %}
-                <img class="img-article" src="{{post.photo_4.url}}">
-            {% endif %}
-            {% if post.link_4 %}
-                <a class="look" href="{{ post.link_4 }}">Перейти по ссылке</a>
-            {% endif %}
-        </div>
-
-        <div class="card">
-            {% if post.photo_5 %}
-                <img class="img-article" src="{{post.photo_5.url}}">
-            {% endif %}
-            {% if post.link_5 %}
-                <a class="look" href="{{ post.link_5 }}">Перейти по ссылке</a>
-            {% endif %}
-        </div>
-
-        <div class="card">
-            {% if post.photo_6 %}
-                <img class="img-article" src="{{post.photo_6.url}}">
-            {% endif %}
-            {% if post.link_6 %}
-                <a class="look" href="{{ post.link_6 }}">Перейти по ссылке</a>
-            {% endif %}
-        </div>
-
-        <div class="card">
-            {% if post.photo_7 %}
-                <img class="img-article" src="{{post.photo_7.url}}">
-            {% endif %}
-            {% if post.link_7 %}
-                <a class="look" href="{{ post.link_7 }}">Перейти по ссылке</a>
-            {% endif %}
-        </div>
-
-        <div class="card">
-            {% if post.photo_8 %}
-                <img class="img-article" src="{{post.photo_8.url}}">
-            {% endif %}
-            {% if post.link_8 %}
-                <a class="look" href="{{ post.link_8 }}">Перейти по ссылке</a>
-            {% endif %}
-        </div>
-
+            {% for achievement in academic_achievements %}
+                <img src="{{ achievement.image.url }}" alt="Achievement Image">
+            {% endfor %}
     </div>
-
 </div>
 {% endblock %}

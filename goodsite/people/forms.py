@@ -8,9 +8,7 @@ from django.core.exceptions import ValidationError
 class AddPortfolioForm(forms.ModelForm):
     class Meta:
         model = Portfolio
-        fields = ['description', 'skills', 'photo_1', 'link_1', 'photo_2', 'link_2', 'photo_3', 'link_3',
-                  'photo_4', 'link_4', 'photo_5', 'link_5', 'photo_6', 'link_6', 'photo_7', 'link_7', 'photo_8',
-                  'link_8', 'slug']
+        fields = ['description', 'skills', 'slug']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -18,6 +16,23 @@ class AddPortfolioForm(forms.ModelForm):
 
     def save(self, commit=True):
         portfolio = super(AddPortfolioForm, self).save(commit=False)
+        portfolio.user = self.user
+        if commit:
+            portfolio.save()
+        return portfolio
+
+
+class AcademicAchievementsForm(forms.ModelForm):
+    class Meta:
+        model = AcademicAchievements
+        fields = ['image', 'cat']
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super(AcademicAchievementsForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        portfolio = super(AcademicAchievementsForm, self).save(commit=False)
         portfolio.user = self.user
         if commit:
             portfolio.save()

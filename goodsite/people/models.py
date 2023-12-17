@@ -10,22 +10,6 @@ class Portfolio(models.Model):
     update_date = models.DateField(auto_now=True)
     description = models.TextField(max_length=765)
     skills = models.CharField(max_length=255)
-    photo_1 = models.ImageField(upload_to='portfolio/%Y/%m/%d/', blank=True, null=True)
-    link_1 = models.URLField(blank=True)
-    photo_2 = models.ImageField(upload_to='portfolio/%Y/%m/%d/', blank=True, null=True)
-    link_2 = models.URLField(blank=True)
-    photo_3 = models.ImageField(upload_to='portfolio/%Y/%m/%d/', blank=True, null=True)
-    link_3 = models.URLField(blank=True)
-    photo_4 = models.ImageField(upload_to='portfolio/%Y/%m/%d/', blank=True, null=True)
-    link_4 = models.URLField(blank=True)
-    photo_5 = models.ImageField(upload_to='portfolio/%Y/%m/%d/', blank=True, null=True)
-    link_5 = models.URLField(blank=True)
-    photo_6 = models.ImageField(upload_to='portfolio/%Y/%m/%d/', blank=True, null=True)
-    link_6 = models.URLField(blank=True)
-    photo_7 = models.ImageField(upload_to='portfolio/%Y/%m/%d/', blank=True, null=True)
-    link_7 = models.URLField(blank=True)
-    photo_8 = models.ImageField(upload_to='portfolio/%Y/%m/%d/', blank=True, null=True)
-    link_8 = models.URLField(blank=True)
 
     def __str__(self):
         return str(self.user)
@@ -37,3 +21,34 @@ class Portfolio(models.Model):
         verbose_name = 'Портфолио'
         verbose_name_plural = 'Портфолио'
         ordering = ['-creation_date', 'user']
+
+
+class AcademicAchievements(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='photos/')
+    creation_date = models.DateField(auto_now_add=True)
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+        return str(self.user)
+
+    class Meta:
+        verbose_name = 'Академические достижения'
+        verbose_name_plural = 'Академические достижения'
+        ordering = ['-creation_date', 'user']
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, db_index=True, verbose_name="Категория")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'cat_slug': self.slug})
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ['id']

@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
-from people.forms import RegisterUserForm, LoginUserForm, AddPortfolioForm
+from people.forms import RegisterUserForm, LoginUserForm, AddPortfolioForm, AcademicAchievementsForm
 from .models import *
 from django.http import Http404
 
@@ -83,12 +83,31 @@ def portfolio(request):
 
 
 def show_portfolio(request, portfolio_slug):
-    post = get_object_or_404(Portfolio, slug=portfolio_slug)
+    portfolio = get_object_or_404(Portfolio, slug=portfolio_slug)
+    academic_achievements = AcademicAchievements.objects.filter(user=request.user)
 
     data = {
-        'post': post,
+        'portfolio': portfolio,
         'menu': menu,
-        'title': 'Портфолио'
+        'title': 'Портфолио',
+        'academic_achievements': academic_achievements
+    }
+
+    return render(request, 'people/portfolio_id.html', context=data)
+
+
+def portfolio_cat(request, portfolio_slug, cat_slug):
+    portfolio = get_object_or_404(Portfolio, slug=portfolio_slug)
+
+    category = get_object_or_404(Category, slug=cat_slug)
+
+    academic_achievements = AcademicAchievements.objects.filter(user=portfolio.user, cat=category)
+
+    data = {
+        'portfolio': portfolio,
+        'menu': menu,
+        'title': 'Портфолио',
+        'academic_achievements': academic_achievements
     }
 
     return render(request, 'people/portfolio_id.html', context=data)
@@ -138,6 +157,22 @@ def add_portfolio(request):
         'title': 'Добавить Портфолио'
     }
     return render(request, 'people/add_portfolio.html', context=data)
+
+
+def add_academic(request):
+    if request.method == 'POST':
+        form = AcademicAchievementsForm(request.POST, request.FILES, user=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AcademicAchievementsForm(user=request.user)
+    data = {
+        'form': form,
+        'menu': menu,
+        'title': 'Добавить Достижение'
+    }
+    return render(request, 'people/add_academic.html', context=data)
 
 
 def redirect_to_home(request):
