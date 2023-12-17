@@ -16,6 +16,7 @@ p {
     align-items: center;
     justify-content: center;
     margin-bottom: 60px;
+    margin-right: 50px;
 }
 
 .content {
@@ -69,4 +70,17 @@ button:hover {
     color: rgb(216, 216, 216);
     background-color: #333;
     transition: all ease 0.5s;
+}
+
+select {
+    color: #333;
+    background-color: rgb(216, 216, 216);
+    border: 2px solid #333;
+    border-radius: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding: 10px;
 }

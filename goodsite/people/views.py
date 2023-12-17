@@ -84,9 +84,14 @@ def portfolio(request):
 
 def show_portfolio(request, portfolio_slug):
     portfolio = get_object_or_404(Portfolio, slug=portfolio_slug)
-    academic_achievements = AcademicAchievements.objects.filter(user=request.user)
+    academic_achievements = AcademicAchievements.objects.filter(user=portfolio.user)
 
     data = {
+        'show_academic_achievements': 'portfolio/' + str(portfolio_slug) + '/academic-achievements',
+        'show_creative_achievements': 'portfolio/' + str(portfolio_slug) + '/creative-achievements',
+        'show_sport_achievements': 'portfolio/' + str(portfolio_slug) + '/sport-achievements',
+        'show_social_activity': 'portfolio/' + str(portfolio_slug) + '/social-activity  ',
+        'show_personal_achievements': 'portfolio/' + str(portfolio_slug) + '/personal-achievements',
         'portfolio': portfolio,
         'menu': menu,
         'title': 'Портфолио',
@@ -104,6 +109,11 @@ def portfolio_cat(request, portfolio_slug, cat_slug):
     academic_achievements = AcademicAchievements.objects.filter(user=portfolio.user, cat=category)
 
     data = {
+        'show_academic_achievements': 'portfolio/' + str(portfolio_slug) + '/academic-achievements',
+        'show_creative_achievements': 'portfolio/' + str(portfolio_slug) + '/creative-achievements',
+        'show_sport_achievements': 'portfolio/' + str(portfolio_slug) + '/sport-achievements',
+        'show_social_activity': 'portfolio/' + str(portfolio_slug) + '/social-activity  ',
+        'show_personal_achievements': 'portfolio/' + str(portfolio_slug) + '/personal-achievements',
         'portfolio': portfolio,
         'menu': menu,
         'title': 'Портфолио',
@@ -130,15 +140,46 @@ def delete_portfolio(request):
 def profile(request):
     if request.user.is_authenticated:
         try:
-            post = get_object_or_404(Portfolio, user=request.user)
+            portfolio = get_object_or_404(Portfolio, user=request.user)
+            academic_achievements = AcademicAchievements.objects.filter(user=portfolio.user)
         except Http404:
             return redirect('add_portfolio')
         data = {
-            'post': post,
+            'show_academic_achievements': 'profile/academic-achievements',
+            'show_creative_achievements': 'profile/creative-achievements',
+            'show_sport_achievements': 'profile/sport-achievements',
+            'show_social_activity': 'profile/social-activity  ',
+            'show_personal_achievements': 'profile/personal-achievements',
+            'portfolio': portfolio,
             'menu': menu,
-            'title': "Ваше портфолио",
+            'title': 'Ваше Портфолио',
+            'academic_achievements': academic_achievements
         }
         return render(request, 'people/profile.html', context=data)
+    else:
+        return redirect('login')
+
+
+def profile_cat(request, cat_slug):
+    if request.user.is_authenticated:
+        try:
+            category = get_object_or_404(Category, slug=cat_slug)
+            portfolio = get_object_or_404(Portfolio, user=request.user)
+            academic_achievements = AcademicAchievements.objects.filter(user=portfolio.user, cat=category)
+        except Http404:
+            return redirect('add_portfolio')
+        data = {
+            'show_academic_achievements': 'profile/academic-achievements',
+            'show_creative_achievements': 'profile/creative-achievements',
+            'show_sport_achievements': 'profile/sport-achievements',
+            'show_social_activity': 'profile/social-activity  ',
+            'show_personal_achievements': 'profile/personal-achievements',
+            'portfolio': portfolio,
+            'menu': menu,
+            'title': 'Ваше Портфолио',
+            'academic_achievements': academic_achievements
+        }
+        return render(request, 'people/profile_cat.html', context=data)
     else:
         return redirect('login')
 

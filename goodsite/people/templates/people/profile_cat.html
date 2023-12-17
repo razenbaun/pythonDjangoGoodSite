@@ -17,6 +17,8 @@
 
         <p class="description">{{portfolio.description}}</p>
 
+
+
         <div class="card">
             <div class="clear">
                 <a class="look" href="/{{show_academic_achievements}}">Академические достижения</a>
@@ -41,8 +43,6 @@
                 <img src="{{ achievement.image.url }}" alt="Achievement Image">
             </div>
             {% endfor %}
-
-
     </div>
 
     <form action="{% url 'delete_portfolio' %}" method="POST">
