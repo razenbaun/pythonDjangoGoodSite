@@ -25,7 +25,7 @@ class AddPortfolioForm(forms.ModelForm):
 class AcademicAchievementsForm(forms.ModelForm):
     class Meta:
         model = AcademicAchievements
-        fields = ['image', 'cat']
+        fields = ['image', 'cat', 'description']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')

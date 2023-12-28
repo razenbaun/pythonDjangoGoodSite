@@ -8,8 +8,8 @@ class Portfolio(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     creation_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
-    description = models.TextField(max_length=765)
-    skills = models.CharField(max_length=255)
+    description = models.TextField(max_length=1765, verbose_name="Описание")
+    skills = models.CharField(max_length=255, verbose_name="Навыки")
 
     def __str__(self):
         return str(self.user)
@@ -25,9 +25,10 @@ class Portfolio(models.Model):
 
 class AcademicAchievements(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='photos/')
+    image = models.ImageField(upload_to='photos/', verbose_name="Подтверждение")
     creation_date = models.DateField(auto_now_add=True)
-    cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    description = models.TextField(max_length=765, blank=True, verbose_name="Описание")
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name="Категория")
 
     def __str__(self):
         return str(self.user)

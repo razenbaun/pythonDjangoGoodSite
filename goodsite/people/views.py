@@ -16,6 +16,14 @@ menu = [
     {'title': 'Портфолио', 'url_n': 'portfolio'},
 ]
 
+achievements_dict = {
+    'academic-achievements': 'Академические достижения',
+    'creative-achievements': 'Творческие достижения',
+    'sport-achievements': 'Спортивные достижения',
+    'social-activity': 'Общественная активность',
+    'personal-achievements': 'Личные достижения'
+}
+
 
 class DataMixin:
     def get_user_context(self, **kwargs):
@@ -116,11 +124,12 @@ def portfolio_cat(request, portfolio_slug, cat_slug):
         'show_personal_achievements': 'portfolio/' + str(portfolio_slug) + '/personal-achievements',
         'portfolio': portfolio,
         'menu': menu,
-        'title': 'Портфолио',
+        'back': 'portfolio/' + str(portfolio_slug),
+        'title': achievements_dict[cat_slug],
         'academic_achievements': academic_achievements
     }
 
-    return render(request, 'people/portfolio_id.html', context=data)
+    return render(request, 'people/portfolio_cat.html', context=data)
 
 
 def delete_portfolio(request):
@@ -174,9 +183,10 @@ def profile_cat(request, cat_slug):
             'show_sport_achievements': 'profile/sport-achievements',
             'show_social_activity': 'profile/social-activity  ',
             'show_personal_achievements': 'profile/personal-achievements',
+            'back': 'profile',
             'portfolio': portfolio,
             'menu': menu,
-            'title': 'Ваше Портфолио',
+            'title': achievements_dict[cat_slug],
             'academic_achievements': academic_achievements
         }
         return render(request, 'people/profile_cat.html', context=data)
@@ -200,7 +210,7 @@ def add_portfolio(request):
     return render(request, 'people/add_portfolio.html', context=data)
 
 
-def add_academic(request):
+def add_achievement(request):
     if request.method == 'POST':
         form = AcademicAchievementsForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():

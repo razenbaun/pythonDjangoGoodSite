@@ -15,7 +15,7 @@
 
         <p class="skills">Навыки: {{portfolio.skills}} </p>
 
-        <p class="description">{{portfolio.description}}</p>
+        <p class="description-main">{{portfolio.description}}</p>
 
         <div class="card">
             <div class="clear">
@@ -35,14 +35,6 @@
                 <a class="look" href="/{{show_personal_achievements}}">Личные достижения</a>
             </div>
         </div>
-
-            {% for achievement in academic_achievements %}
-            <div class="card">
-                <img src="{{ achievement.image.url }}" alt="Achievement Image">
-            </div>
-            {% endfor %}
-
-
 
     </div>
 </div>
